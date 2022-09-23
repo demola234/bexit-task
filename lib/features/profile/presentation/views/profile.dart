@@ -12,6 +12,10 @@ import '../../../../core/error/toasts.dart';
 import '../../../../core/utils/bexit_logout_button.dart';
 import '../controller/profile_controller.dart';
 import '../provider/profile_provider.dart';
+import '../widgets/email_text.dart';
+import '../widgets/profile_image.dart';
+import '../widgets/profile_items.dart';
+import '../widgets/verified_user.dart';
 
 class Profile extends ConsumerStatefulWidget {
   const Profile({super.key});
@@ -21,30 +25,6 @@ class Profile extends ConsumerStatefulWidget {
 }
 
 class _ProfileState extends ConsumerState<Profile> {
-  List<File> image = [];
-  void selectImage() async {
-    List<Media>? res = await ImagesPicker.pick(
-      cropOpt: CropOption(
-        aspectRatio: CropAspectRatio.custom,
-        cropType: CropType.rect,
-      ),
-      count: 1,
-      pickType: PickType.image,
-    );
-
-    if (res != null) {
-      setState(() {
-        image.addAll(res.map((e) => File(e.path)));
-        if (kDebugMode) {
-          print(image.first.path);
-        }
-      });
-      ref.watch(profileNotifierProvider.notifier).editProfileImage(image[0]);
-    } else if (res == null) {
-      Toasts.showErrorToast("No Image Selected");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final value = ref.watch(getUserIdProvider);
@@ -56,27 +36,11 @@ class _ProfileState extends ConsumerState<Profile> {
             YMargin(50),
 
             value.when(
-              data: (data) => Align(
-                alignment: Alignment.center,
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                      child: Text(
-                    data.user.email[0].toUpperCase(),
-                    style: Config.h1(context).copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  )),
-                ),
-              ),
+              data: (data) => ProfileImage(data: data),
               loading: () => CircularProgressIndicator(),
-              error: ((error, stackTrace) => Container()),
+              error: ((error, stackTrace) => Container(
+                    child: Text("An Error Occurred Fetching Profile Image"),
+                  )),
             ),
 
             YMargin(10),
@@ -86,32 +50,16 @@ class _ProfileState extends ConsumerState<Profile> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   value.when(
-                      data: (data) => Text(
-                            data.user.email,
-                            style: Config.b2(context).copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
+                      data: (data) => EmailText(data: data),
                       loading: () => CircularProgressIndicator(),
-                      error: ((error, stackTrace) => Container())),
+                      error: ((error, stackTrace) => Container(
+                            child: Text(
+                                "An Error Occurred Fetching Email Address"),
+                          ))),
                   XMargin(5),
                   value.when(
                     data: (data) => data.user.status
-                        ? Container(
-                            height: 18,
-                            width: 18,
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Center(
-                                child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                              size: 14,
-                            )),
-                          )
+                        ? VerifiedUser(data: data)
                         : Center(
                             child: Icon(
                             Icons.cancel_rounded,
@@ -135,63 +83,11 @@ class _ProfileState extends ConsumerState<Profile> {
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 35.0),
                 child: getProfile.when(
-                  data: (data) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // numberOfBusiness
-
-                      Column(
-                        children: [
-                          Text(
-                            "Business",
-                            style: Config.b1(context),
-                          ),
-                          Text(
-                            data.numberOfBusiness.toString(),
-                            style: Config.h2(context),
-                          )
-                        ],
-                      ),
-                      Container(
-                        height: 30,
-                        width: 2,
-                        color: Colors.grey.withOpacity(0.5),
-                      ),
-                      // numberOfProducts
-                      Column(
-                        children: [
-                          Text(
-                            "Products",
-                            style: Config.b1(context),
-                          ),
-                          Text(
-                            data.numberOfProducts.toString(),
-                            style: Config.h2(context),
-                          )
-                        ],
-                      ),
-                      Container(
-                        height: 30,
-                        width: 2,
-                        color: Colors.grey.withOpacity(0.5),
-                      ),
-                      // numberOfServices
-                      Column(
-                        children: [
-                          Text(
-                            "Services",
-                            style: Config.b1(context),
-                          ),
-                          Text(
-                            data.numberOfServices.toString(),
-                            style: Config.h2(context),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                  data: (data) => ProfileItems(data: data),
                   loading: () => CircularProgressIndicator(),
-                  error: ((error, stackTrace) => Container()),
+                  error: ((error, stackTrace) => Container(
+                        child: Text("An Error Occurred Fetching Profile Items"),
+                      )),
                 )),
             Spacer(),
             BexitLogout(
@@ -205,5 +101,29 @@ class _ProfileState extends ConsumerState<Profile> {
         ),
       ),
     );
+  }
+
+  List<File> image = [];
+  void selectImage() async {
+    List<Media>? res = await ImagesPicker.pick(
+      cropOpt: CropOption(
+        aspectRatio: CropAspectRatio.custom,
+        cropType: CropType.rect,
+      ),
+      count: 1,
+      pickType: PickType.image,
+    );
+
+    if (res != null) {
+      setState(() {
+        image.addAll(res.map((e) => File(e.path)));
+        if (kDebugMode) {
+          print(image.first.path);
+        }
+      });
+      ref.watch(profileNotifierProvider.notifier).editProfileImage(image[0]);
+    } else if (res == null) {
+      Toasts.showErrorToast("No Image Selected");
+    }
   }
 }

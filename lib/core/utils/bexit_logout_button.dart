@@ -1,4 +1,5 @@
 
+import 'package:bex_it/core/constants/colors.dart';
 import 'package:bex_it/core/utils/config.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class BexitLogout extends StatelessWidget {
             height: 72,
             width: context.screenWidth(),
             decoration: BoxDecoration(
-                color: Colors.red,
+                color: BexItColor.BexItRed,
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             child: showLoading != null && showLoading!
                 ? Align(
@@ -35,7 +36,7 @@ class BexitLogout extends StatelessWidget {
                       height: 15,
                       width: 15,
                       child: CircularProgressIndicator(
-                        color: Colors.white,
+                        color: BexItColor.BexItWhite,
                         strokeWidth: 2,
                         // size: 30,
                       ),
@@ -47,7 +48,7 @@ class BexitLogout extends StatelessWidget {
                       style: Config.h3(context).copyWith(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w300,
-                        color: Colors.white,
+                        color: BexItColor.BexItWhite,
                       ),
                     )),
           ),

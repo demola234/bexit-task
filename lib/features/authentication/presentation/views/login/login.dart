@@ -1,3 +1,4 @@
+import 'package:bex_it/core/constants/colors.dart';
 import 'package:bex_it/core/state/view_state.dart';
 import 'package:bex_it/core/utils/config.dart';
 import 'package:bex_it/core/utils/navigation_service.dart';
@@ -30,14 +31,7 @@ class _LoginState extends ConsumerState<Login> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               children: [
-                YMargin(40),
-                Row(
-                  children: [
-                    IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_back_ios_new))
-                  ],
-                ),
-                YMargin(40),
+                YMargin(80),
                 Row(
                   children: [
                     Padding(
@@ -115,7 +109,8 @@ class _LoginState extends ConsumerState<Login> {
                 },
                 child: Text(
                   "SignUp",
-                  style: Config.b2(context).copyWith(color: Color(0xFF476EBE)),
+                  style: Config.b2(context)
+                      .copyWith(color: BexItColor.BexItPrimary),
                 ),
               )
             ],

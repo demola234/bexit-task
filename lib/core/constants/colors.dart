@@ -5,4 +5,5 @@ class BexItColor {
   static const BexItPrimary = Color(0xFF476EBE);
   static const BexItRed = Colors.red;
   static const BexItGreen = Colors.green;
+  static const BexItWhite = Colors.white;
 }

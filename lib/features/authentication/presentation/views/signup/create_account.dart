@@ -1,10 +1,10 @@
 import 'package:bex_it/core/state/view_state.dart';
 import 'package:bex_it/core/utils/config.dart';
 import 'package:bex_it/core/utils/navigation_service.dart';
-import 'package:bex_it/features/authentication/presentation/views/signup/create_account.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../core/constants/colors.dart';
 import '../../../../../core/utils/bexit_button.dart';
 import '../../../../../core/utils/bexit_textfield.dart';
 import '../../provider/authentication_provider.dart';
@@ -31,14 +31,7 @@ class _SignUpState extends ConsumerState<SignUp> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               children: [
-                YMargin(40),
-                Row(
-                  children: [
-                    IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_back_ios_new))
-                  ],
-                ),
-                YMargin(40),
+                YMargin(80),
                 Row(
                   children: [
                     Padding(
@@ -116,7 +109,8 @@ class _SignUpState extends ConsumerState<SignUp> {
                 },
                 child: Text(
                   "Login",
-                  style: Config.b2(context).copyWith(color: Color(0xFF476EBE)),
+                  style: Config.b2(context)
+                      .copyWith(color: BexItColor.BexItPrimary),
                 ),
               )
             ],

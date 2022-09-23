@@ -36,7 +36,7 @@ class BexItButton extends StatelessWidget {
                       height: 15,
                       width: 15,
                       child: CircularProgressIndicator(
-                        color: Colors.white,
+                        color: BexItColor.BexItWhite,
                         strokeWidth: 2,
                         // size: 30,
                       ),
@@ -48,7 +48,7 @@ class BexItButton extends StatelessWidget {
                       style: Config.h3(context).copyWith(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w300,
-                        color: Colors.white,
+                        color: BexItColor.BexItWhite,
                       ),
                     )),
           ),

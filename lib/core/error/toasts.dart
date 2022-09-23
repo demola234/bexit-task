@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 
+import '../constants/colors.dart';
+
 class Toasts {
   static void showErrorToast(message) async {
     showOverlayNotification(
@@ -10,7 +12,7 @@ class Toasts {
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: Material(
-              color: Colors.red,
+              color: BexItColor.BexItRed,
               borderRadius: BorderRadius.circular(8.0),
               child: Container(
                 width: double.maxFinite,
@@ -20,7 +22,7 @@ class Toasts {
                   maxLines: 5,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: BexItColor.BexItWhite,
                   ),
                 ),
               ),
@@ -41,7 +43,7 @@ class Toasts {
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: Material(
-              color: Colors.green,
+              color: BexItColor.BexItGreen,
               borderRadius: BorderRadius.circular(8.0),
               child: Container(
                 width: double.maxFinite,
@@ -51,7 +53,7 @@ class Toasts {
                   maxLines: 5,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: BexItColor.BexItWhite,
                   ),
                 ),
               ),
