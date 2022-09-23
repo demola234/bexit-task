@@ -1,3 +1,4 @@
+import 'package:bex_it/core/constants/colors.dart';
 import 'package:bex_it/core/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +27,7 @@ class BexItButton extends StatelessWidget {
             height: 72,
             width: context.screenWidth(),
             decoration: BoxDecoration(
-                color: Color(0xFF476EBE),
+                color: BexItColor.BexItPrimary,
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             child: showLoading != null && showLoading!
                 ? Align(
