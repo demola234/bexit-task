@@ -4,8 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 import '../../core/utils/navigation_service.dart';
-import '../../features/authentication/presentation/views/login/login.dart';
-import '../../features/authentication/presentation/views/signup/create_account.dart';
+import '../../features/authentication/presentation/views/logger/logger.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -21,7 +20,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       navigatorKey: NavigationService().navigationKey,
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: LoggerScreen(),
     ));
   }
 }
